@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,13 +15,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('users.register');
+    return view('users.main');
 });
 
-Route::get('users', function () {
-return view('users.layout');
+Route::get('register', function () {
+return view('users.register');
 });
+Route::get('data-view-login', function () {
+    return view('users.dataViewer');
+    });
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/', [UserController::class, 'index'])->name('main');
+// Route::get('register', [UserController::class, 'index'])->name('users.register');
+// Route::get('data-view-login', [UserController::class, 'index'])->name('users.register');
+Route::post('user-registration', [UserController::class, 'registration'])->name('register.user');
