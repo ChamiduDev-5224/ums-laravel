@@ -9,16 +9,16 @@
 
  </div>
  <div class="border w-50 mt-10 mx-auto my-5">
-   <form class="my-5">
+   <form class="my-5" action="{{route('login.user')}}" method="POST">
       <h2 class="text-center font-weight-bold">Login</h2>
       <div class="form-group px-4">
-        <label for="exampleInputEmail1">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        <label>Email address</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
+        <small class="form-text text-muted">We'll never share your email with anyone else.</small>
       </div>
       <div class="form-group px-4">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        <label>Password</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
       </div>
       <button type="submit" class="btn btn-primary mx-4 mt-1">Submit</button>
     </form>
