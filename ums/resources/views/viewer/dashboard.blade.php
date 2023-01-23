@@ -2,16 +2,7 @@
 @section('content')
 
 <div>
-        <div class="bg-primary d-flex flex-row align-items-baseline">
-               <h2 class="text-center text-light mr-auto p-2">User Management System</h2>
-               <span class="text-light p-2 font-bold">
-                @php
-                    $data=session('email');
-                    echo $data
-                @endphp
-              </span>
-               <button class="btn btn-dark m-2"><a class="text-light" href="{{ url('logout') }}">Log out</a></button>
-        </div>
+       @include('layouts.header')
         <div>
             @include('layouts.panel')
         </div>

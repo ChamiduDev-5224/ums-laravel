@@ -2,21 +2,22 @@
 @section('content')
 
 <div>
-        <div class="bg-primary d-flex flex-row align-items-baseline">
-               <h2 class="text-center text-light mr-auto p-2">User Management System</h2>
-               <span class="text-light p-2 font-bold">
-                @php
-                    $data=session('email');
-                    echo $data
-                @endphp
-              </span>
-               <button class="btn btn-dark m-2"><a class="text-light" href="{{ url('logout') }}">Log out</a></button>
-        </div>
+     <div>
+        @include('layouts.header')
+     </div>
         <div>
             @include('layouts.panel')
         </div>
-        <div>
-            <button class="btn btn-primary mx-5 mt-3"><a href="" class="text-light">Add New Person</a></button>
+        <div class="d-flex flex-row align-items-baseline">
+            <button class="btn btn-primary mx-5 mt-3"><a href="{{url('operator-dashboard/add-new')}}" class="text-light">Add New Person</a></button>
+                @if ($message = Session::get('message'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Well done!</strong> {{$message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+               @endif
         </div>
         <div class="mt-4 mx-5">
           <div class="table-responsive">
@@ -37,25 +38,37 @@
                   </tr>
                 </thead>
                 <tbody>
+                    @foreach($persons as $key => $person)
                   <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
+                    <th scope="row">{{ $persons->firstItem() + $key }}</th>
+                    <td>{{ $person->name }}</td>
+                    <td>{{ $person->nic }}</td>
+                    <td>{{ $person->dob }}</td>
+                    <td>{{ $person->age }}</td>
+                    <td>{{ $person->contact }}</td>
+                    <td>{{ $person->address }}</td>
+                    <td>{{ $person->religion }}</td>
+                    {{-- <img src="{{ asset('storage/2/images/'.$user->profile_image) }}" /> --}}
+                    <td><img src="{{ asset('storage/'.$person->image)}}" width='50px'/></td>
+                    <td>{{ $person->nationality }}</td>
+                    <td class="d-flex flex-row">
+                        <button class="btn btn-primary m-1">View</button>
+                        <button class="btn btn-info m-1">Edit</button>
+                        <form action="{{ route('person.destroy',$person->id)}}" class="m-1" method="POST">
+                            @csrf
+                            @method('DELETE')
+                        <button class="btn btn-outline-danger" type="submit">Delete</button>
+                    </td>
+                    </form>
                   </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
+                  @endforeach
                 </tbody>
               </table>
+              <div class="paginate">
+                <div class="d-flex flex-row">
+                    {{ $persons->links('pagination::bootstrap-4') }}
+                </div>
+            </div>
            </div>
         </div>
 </div>
