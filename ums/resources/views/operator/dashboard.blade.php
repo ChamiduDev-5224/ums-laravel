@@ -38,6 +38,7 @@
                   </tr>
                 </thead>
                 <tbody>
+                    @if (!empty($persons))
                     @foreach($persons as $key => $person)
                   <tr>
                     <th scope="row">{{ $persons->firstItem() + $key }}</th>
@@ -53,8 +54,8 @@
                     <td>{{ $person->nationality }}</td>
                     <td class="d-flex flex-row">
                         <button class="btn btn-primary m-1">View</button>
-                        <button class="btn btn-info m-1">Edit</button>
-                        <form action="{{ route('person.destroy',$person->id)}}" class="m-1" method="POST">
+                        <button class="btn btn-info m-1"><a class="text-light" href="{{ url('edit-person/'.$person->id) }}">Edit</a></button>
+                        <form action="{{ route('persons.destroy',$person->id)}}" class="m-1" method="POST">
                             @csrf
                             @method('DELETE')
                         <button class="btn btn-outline-danger" type="submit">Delete</button>
@@ -62,6 +63,7 @@
                     </form>
                   </tr>
                   @endforeach
+                  @endif
                 </tbody>
               </table>
               <div class="paginate">

@@ -43,7 +43,9 @@ Route::get('viewer-dashboard',[ViewerController::class,'index']);
 Route::get('operator-dashboard',[OperatorController::class,'index'])->name('operator.dashboard');
 Route::get('operator-dashboard/add-new',[OperatorController::class,'dataForm']);
 Route::post('add-person', [OperatorController::class, 'store'])->name('add.person');
-Route::delete('remove-person/{id}',[OperatorController::class, 'destroy'])->name('person.destroy');
+Route::get('edit-person/{id}', [OperatorController::class, 'edit']);
+Route::put('update-person/{id}',[OperatorController::class, 'update'])->name('persons.update');
+Route::delete('remove-person/{id}',[OperatorController::class, 'destroy'])->name('persons.destroy');
 
 
 //user
