@@ -1,12 +1,21 @@
 @extends('users.layout')
 @section('content')
+@php
+$role=session('role');
+@endphp
 
 <div>
      <div>
         @include('layouts.header')
      </div>
         <div>
-            @include('layouts.panel')
+            <div class="main-section mt-4 d-flex bg-info mx-5 rounded justify-content-between px-4 overflow-auto">
+                {{-- {{$totalRegister}} --}}
+                <h3 class="py-3">Registered count : {{$personCount}} </h3>
+
+                <h3 class="py-3">Data Viewers : {{$viewersCount}}</h3>
+                <h3 class="py-3">Data Operators : {{$operatorsCount}}</h3>
+            </div>
         </div>
         <div class="d-flex flex-row align-items-baseline">
             <button class="btn btn-primary mx-5 mt-3"><a href="{{url('operator-dashboard/add-new')}}" class="text-light">Add New Person</a></button>
@@ -21,7 +30,7 @@
         </div>
         <div class="mt-4 mx-5">
           <div class="table-responsive">
-            <table class="table table-hover">
+            <table class="table table-hover" id="myTable">
                 <thead class="thead-dark">
                   <tr>
                     <th scope="col">#</th>
@@ -49,28 +58,22 @@
                     <td>{{ $person->contact }}</td>
                     <td>{{ $person->address }}</td>
                     <td>{{ $person->religion }}</td>
-                    {{-- <img src="{{ asset('storage/2/images/'.$user->profile_image) }}" /> --}}
                     <td><img src="{{ asset('storage/'.$person->image)}}" width='50px'/></td>
                     <td>{{ $person->nationality }}</td>
                     <td class="d-flex flex-row">
-                        <button class="btn btn-primary m-1">View</button>
+                        <button class="btn btn-primary m-1"><a class="text-light" href="{{ url('view-person/'.$person->id) }}">View</a></button>
                         <button class="btn btn-info m-1"><a class="text-light" href="{{ url('edit-person/'.$person->id) }}">Edit</a></button>
-                        <form action="{{ route('persons.destroy',$person->id)}}" class="m-1" method="POST">
-                            @csrf
-                            @method('DELETE')
-                        <button class="btn btn-outline-danger" type="submit">Delete</button>
-                    </td>
-                    </form>
+                             <form action="{{ route('persons.destroy',$person->id)}}" class="m-1" method="POST">
+                                 @csrf
+                                 @method('DELETE')
+                             <button class="btn btn-outline-danger" type="submit">Delete</button>
+                         </td>
+                         </form>
                   </tr>
                   @endforeach
                   @endif
                 </tbody>
               </table>
-              <div class="paginate">
-                <div class="d-flex flex-row">
-                    {{ $persons->links('pagination::bootstrap-4') }}
-                </div>
-            </div>
            </div>
         </div>
 </div>

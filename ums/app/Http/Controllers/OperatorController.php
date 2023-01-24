@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Person;
-
+use App\Models\User;
 class OperatorController extends Controller
 {
     public function index(){
         $persons = Person::latest()->paginate(4);
-        return view('operator.dashboard',compact('persons'));
+        $personCount = Person::count('id');
+        $viewersCount =User::where('role','data_viewer')->count();
+        $operatorsCount =User::where('role','data_entry')->count();
+
+        return view('operator.dashboard',compact(['persons','personCount','viewersCount','operatorsCount']));
     }
 
     public function dataForm(){
@@ -93,5 +97,13 @@ class OperatorController extends Controller
         return redirect()->route('operator.dashboard')
                         ->with('message','Person deleted successfully.');
     }
+
+    //show by row
+    public function show( $id)
+    {
+        $person = Person::find($id);
+        return view('layouts.view',compact('person'));
+    }
+
 
 }

@@ -3,6 +3,11 @@
 
 <div>
   @include('layouts.header')
+
+  <button class="btn btn-warning mt-5 mx-5 px-4" >
+    <a class="text-light" href="{{url('/operator-dashboard')}}">Back</a>
+     </button>
+     
     <div class="mx-5 border mt-3 rounded">
         <form class="px-3 my-3" enctype="multipart/form-data"  action="{{ route('persons.update',$person->id) }}" method="POST">
             @csrf

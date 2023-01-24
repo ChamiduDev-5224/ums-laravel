@@ -22,15 +22,10 @@ class UserController extends Controller
             $role = Auth::user()->role;
             $email = Auth::user()->email;
 
-
             session()->put('id', $id);
             session()->put('role', $role);
             session()->put('email', $email);
 
-
-            /*here, email is equal to the admin@gmail.com and name is equal to the 'admin' it redirect to the
-             '/prescriptions' route. and else it redirect to the '/users' route
-            */
             if ($role == "data_entry") {
                 return redirect('/operator-dashboard');
             } else {
@@ -40,32 +35,9 @@ class UserController extends Controller
 
             return redirect('/')->withErrors(['Incorrect Login Details.']);
         }
-        /*$request->validate([
-            'email' => 'required',
-            'password' => 'required',
-            // 'role' => 'required'
-        ]);
-
-        $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials)) {
-            return redirect()->intended('data-view-login')
-                        ->withSuccess('Signed in');
-        }*/
-
-        // return withSuccess('Login details are not valid');
     }
-    // public function dashboard()
-    // {
-    //     if(Auth::check()){
-    //         return view('users.dataViewer');
-    //     } else{
-    //         return view
-    //     }
 
-    //     return redirect("index")->withSuccess('are not allowed to access');
-    // }
-
-
+    //register validation
     public function registration(Request $request)
     {
         $request->validate([
@@ -81,6 +53,7 @@ class UserController extends Controller
         return redirect("/")->withSuccess('have signed-in');
     }
 
+  //register
     public function create(array $data)
     {
       return User::create([

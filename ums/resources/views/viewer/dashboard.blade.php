@@ -4,11 +4,17 @@
 <div>
        @include('layouts.header')
         <div>
-            @include('layouts.panel')
+            <div class="main-section mt-4 d-flex bg-info mx-5 rounded justify-content-between px-4 overflow-auto">
+                {{-- {{$totalRegister}} --}}
+                <h3 class="py-3">Registered count : {{$personCount}} </h3>
+                <h3 class="py-3">Data Viewers : {{$viewersCount}}</h3>
+                <h3 class="py-3">Data Operators : {{$operatorsCount}}</h3>
+            </div>
+
         </div>
         <div class="mt-4 mx-5">
           <div class="table-responsive">
-            <table class="table table-hover">
+            <table class="table table-hover" id="myTable">
                 <thead class="thead-dark">
                   <tr>
                     <th scope="col">#</th>
@@ -25,23 +31,25 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
+                @if (!empty($persons))
+                @foreach($persons as $key => $person)
+              <tr>
+                <th scope="row">{{ $persons->firstItem() + $key }}</th>
+                <td>{{ $person->name }}</td>
+                <td>{{ $person->nic }}</td>
+                <td>{{ $person->dob }}</td>
+                <td>{{ $person->age }}</td>
+                <td>{{ $person->contact }}</td>
+                <td>{{ $person->address }}</td>
+                <td>{{ $person->religion }}</td>
+                <td><img src="{{ asset('storage/'.$person->image)}}" width='50px'/></td>
+                <td>{{ $person->nationality }}</td>
+                <td class="d-flex flex-row">
+                    <button class="btn btn-primary m-1"><a class="text-light" href="{{ url('view-person/'.$person->id) }}">View</a></button>
+                </td>
+               </tr>
+               @endforeach
+               @endif
                 </tbody>
               </table>
            </div>
