@@ -7,6 +7,13 @@ use App\Models\Person;
 use App\Models\User;
 class OperatorController extends Controller
 {
+  //authentication
+    public function __construct()
+        {
+         $this->middleware('auth');
+        }
+
+  //Main window redering
     public function index(){
         $persons = Person::latest()->paginate(4);
         $personCount = Person::count('id');
@@ -15,7 +22,7 @@ class OperatorController extends Controller
 
         return view('operator.dashboard',compact(['persons','personCount','viewersCount','operatorsCount']));
     }
-
+  //persons adding form redering
     public function dataForm(){
       return view('operator.addForm');
     }
@@ -30,8 +37,6 @@ class OperatorController extends Controller
             'contact'=>'required|digits:10',
             'image' => 'required|file|mimes:jpg,jpeg,png,gif|max:1024',
             'religion'=>'required',
-
-
         ]);
         $image_path = $request->file('image')->store('image', 'public');
 
@@ -82,9 +87,7 @@ class OperatorController extends Controller
         $person->religion = $request->input('religion');
         $person->nationality = $request->input('nationality');
         $person->update();
-        // return redirect()->back()->with('status','Student Updated Successfully');
 
-        // $person->update($request->all());
         return redirect()->route('operator.dashboard')
                         ->with('message','Person updated successfully.');
     }
@@ -98,7 +101,7 @@ class OperatorController extends Controller
                         ->with('message','Person deleted successfully.');
     }
 
-    //show by row
+    //view by row
     public function show( $id)
     {
         $person = Person::find($id);

@@ -6,9 +6,21 @@
         <div>
             <div class="main-section mt-4 d-flex bg-info mx-5 rounded justify-content-between px-4 overflow-auto">
                 {{-- {{$totalRegister}} --}}
-                <h3 class="py-3">Registered count : {{$personCount}} </h3>
-                <h3 class="py-3">Data Viewers : {{$viewersCount}}</h3>
-                <h3 class="py-3">Data Operators : {{$operatorsCount}}</h3>
+                <h3 class="py-3">Registered count : @if (!empty($personCount))
+                    {{$personCount}}
+                @else
+                   0
+                @endif </h3>
+                <h3 class="py-3">Data Viewers : @if (!empty($viewersCount))
+                    {{$viewersCount}}
+                @else
+                   0
+                @endif </h3>
+                <h3 class="py-3">Data Operators : @if (!empty($operatorsCount))
+                    {{$operatorsCount}}
+                @else
+                   0
+                @endif </h3>
             </div>
 
         </div>

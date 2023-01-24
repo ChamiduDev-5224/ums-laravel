@@ -3,7 +3,6 @@
 @php
 $role=session('role');
 @endphp
-
 <div>
      <div>
         @include('layouts.header')
@@ -11,15 +10,28 @@ $role=session('role');
         <div>
             <div class="main-section mt-4 d-flex bg-info mx-5 rounded justify-content-between px-4 overflow-auto">
                 {{-- {{$totalRegister}} --}}
-                <h3 class="py-3">Registered count : {{$personCount}} </h3>
-
-                <h3 class="py-3">Data Viewers : {{$viewersCount}}</h3>
-                <h3 class="py-3">Data Operators : {{$operatorsCount}}</h3>
+                <h3 class="py-3">Registered count : @if (!empty($personCount))
+                    {{$personCount}}
+                @else
+                   0
+                @endif </h3>
+                <h3 class="py-3">Data Viewers : @if (!empty($viewersCount))
+                    {{$viewersCount}}
+                @else
+                   0
+                @endif </h3>
+                <h3 class="py-3">Data Operators : @if (!empty($operatorsCount))
+                    {{$operatorsCount}}
+                @else
+                   0
+                @endif </h3>
             </div>
         </div>
-        <div class="d-flex flex-row align-items-baseline">
-            <button class="btn btn-primary mx-5 mt-3"><a href="{{url('operator-dashboard/add-new')}}" class="text-light">Add New Person</a></button>
-                @if ($message = Session::get('message'))
+        <div class="d-flex flex-row align-items-baseline mx-5">
+            <button class="btn btn-primary mt-3 py-2"><a href="{{url('operator-dashboard/add-new')}}" class="text-light">Add New Person</a></button>
+            <button class="btn btn-primary mx-2 mt-3 py-2"><a href="{{url('show-chart')}}" class="text-light">Chart Analysis</a></button>
+
+            @if ($message = Session::get('message'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <strong>Well done!</strong> {{$message}}
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
