@@ -28,7 +28,7 @@ Route::get('show-chart',[ViewerController::class,'show']);
 
 //operator
 Route::get('operator-dashboard',[OperatorController::class,'index'])->name('operator.dashboard');
-Route::get('operator-dashboard/add-new',[OperatorController::class,'dataForm'])->middleware('auth');
+Route::get('operator-dashboard/add-new',[OperatorController::class,'dataForm']);
 Route::post('add-person', [OperatorController::class, 'store'])->name('add.person');
 Route::get('view-person/{id}',[OperatorController::class, 'show'])->name('persons.show');
 Route::get('edit-person/{id}', [OperatorController::class, 'edit']);

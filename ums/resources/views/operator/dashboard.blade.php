@@ -28,9 +28,11 @@ $role=session('role');
             </div>
         </div>
         <div class="d-flex flex-row align-items-baseline mx-5">
-            <button class="btn btn-primary mt-3 py-2"><a href="{{url('operator-dashboard/add-new')}}" class="text-light">Add New Person</a></button>
+            {{-- button link --}}
+            <button class="btn btn-primary mt-2 py-2"><a href="{{url('operator-dashboard/add-new')}}" class="text-light">Add New Person</a></button>
             <button class="btn btn-primary mx-2 mt-3 py-2"><a href="{{url('show-chart')}}" class="text-light">Chart Analysis</a></button>
 
+            {{-- show toast --}}
             @if ($message = Session::get('message'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <strong>Well done!</strong> {{$message}}
@@ -39,8 +41,11 @@ $role=session('role');
                 </button>
               </div>
                @endif
+
         </div>
-        <div class="mt-4 mx-5">
+
+        {{-- data table --}}
+        <div class="mx-5">
           <div class="table-responsive">
             <table class="table table-hover" id="myTable">
                 <thead class="thead-dark">
@@ -73,8 +78,11 @@ $role=session('role');
                     <td><img src="{{ asset('storage/'.$person->image)}}" width='50px'/></td>
                     <td>{{ $person->nationality }}</td>
                     <td class="d-flex flex-row">
+                        {{-- view --}}
                         <button class="btn btn-primary m-1"><a class="text-light" href="{{ url('view-person/'.$person->id) }}">View</a></button>
+                        {{-- update --}}
                         <button class="btn btn-info m-1"><a class="text-light" href="{{ url('edit-person/'.$person->id) }}">Edit</a></button>
+                        {{-- delete --}}
                              <form action="{{ route('persons.destroy',$person->id)}}" class="m-1" method="POST">
                                  @csrf
                                  @method('DELETE')
@@ -86,6 +94,11 @@ $role=session('role');
                   @endif
                 </tbody>
               </table>
+              {{-- custom pagination --}}
+              <div class="ml-1 mt-2" >
+                {{$persons->links('pagination::bootstrap-4')}}
+              </div>
+
            </div>
         </div>
 </div>

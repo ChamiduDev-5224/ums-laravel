@@ -2,7 +2,7 @@
 @section('content')
 
 <div>
-       @include('layouts.header')
+    @include('layouts.header')
         <div>
             <div class="main-section mt-4 d-flex bg-info mx-5 rounded justify-content-between px-4 overflow-auto">
                 {{-- {{$totalRegister}} --}}
@@ -22,9 +22,14 @@
                    0
                 @endif </h3>
             </div>
-
+            <div class="d-flex flex-row align-items-baseline mx-5">
+                {{-- button link --}}
+                <button class="btn btn-primary mx-2 mt-3 py-2"><a href="{{url('show-chart')}}" class="text-light">Chart Analysis</a></button>
+            </div>
         </div>
-        <div class="mt-4 mx-5">
+
+        {{-- data table --}}
+        <div class="mx-5">
           <div class="table-responsive">
             <table class="table table-hover" id="myTable">
                 <thead class="thead-dark">
@@ -64,6 +69,10 @@
                @endif
                 </tbody>
               </table>
+              {{-- custom pagination --}}
+              <div class="ml-1">
+                {{$persons->links('pagination::bootstrap-4')}}
+              </div>
            </div>
         </div>
 </div>

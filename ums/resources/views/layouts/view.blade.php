@@ -6,6 +6,7 @@ $role=session('role');
 
 <div>
   @include('layouts.header')
+  {{-- back button --}}
   <button class="btn btn-warning mt-5 mx-5 px-4" >
    @if ($role=='data_entry')
    <a class="text-light" href="{{url('/operator-dashboard')}}">Back</a>
@@ -13,6 +14,8 @@ $role=session('role');
    <a class="text-light" href="{{url('/viewer-dashboard')}}">Back</a>
    @endif
     </button>
+    
+    {{-- data view component --}}
     <div class="mx-5 border mt-5 rounded">
         <form class="px-3 my-3">
             <div class="form-row">
