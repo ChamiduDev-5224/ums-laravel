@@ -54,6 +54,8 @@ $role=session('role');
         chart.draw(data, options);
       }
 </script>
+
+
 {{-- barchart --}}
 <script>
       google.charts.load('upcoming', {'packages': ['vegachart']}).then(drawChart);
