@@ -12,6 +12,11 @@
             @endforeach
     </div>
  @endif
+ @if ($message = Session::get('message'))
+ <div class="login-alert alert alert-success mx-3">
+    <span>{{ $message }}</span>
+</div>
+ @endif
 
  {{-- login form --}}
  <div class="border w-50 mt-10 mx-auto mt-5">

@@ -50,7 +50,7 @@ class UserController extends Controller
         $data = $request->all();
         $check = $this->create($data);
 
-        return redirect("/")->withSuccess('have signed-in');
+        return redirect("/")->with('message','Person updated successfully.');
     }
 
   //register
